@@ -1,0 +1,39 @@
+{
+	"name": "rststore",
+	"version": "1.0.0",
+	"description": "API for RSTStore",
+	"type": "module",
+	"main": "server.js",
+	"scripts": {
+		"start": "node backend/server",
+		"server": "nodemon backend/server",
+		"client": "npm start --prefix frontend",
+		"dev": "concurrently \"npm run server\" \"npm run client\"",
+		"data:import": "node backend/seeder",
+		"data:destroy": "node backend/seeder -d"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@gitlab.com/rahulat4200/rststore-april-morning.git"
+	},
+	"author": "Rahul Sharma",
+	"license": "UNLICENCED",
+	"bugs": {
+		"url": "https://gitlab.com/rahulat4200/rststore-april-morning/issues"
+	},
+	"homepage": "https://gitlab.com/rahulat4200/rststore-april-morning#readme",
+	"dependencies": {
+		"bcryptjs": "^2.4.3",
+		"colors": "^1.4.0",
+		"dotenv": "^16.0.3",
+		"express": "^4.18.2",
+		"express-async-handler": "^1.2.0",
+		"jsonwebtoken": "^9.0.0",
+		"mongoose": "^7.2.1",
+		"multer": "^1.4.5-lts.1"
+	},
+	"devDependencies": {
+		"concurrently": "^8.0.1",
+		"nodemon": "^2.0.22"
+	}
+}
