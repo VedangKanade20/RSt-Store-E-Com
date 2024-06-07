@@ -9,7 +9,7 @@ import {
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
   const { data } = await axios.get(
-    `https://rst-store-e-com.onrender.com/products/${id}`
+    `https://rst-store-e-com.onrender.com/api/products/${id}`
   );
 
   dispatch({

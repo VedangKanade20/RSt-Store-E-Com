@@ -37,7 +37,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.post(
-      `https://rst-store-e-com.onrender.com/orders`,
+      `https://rst-store-e-com.onrender.com/api/orders`,
       order,
       config
     );
@@ -69,7 +69,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `https://rst-store-e-com.onrender.com/orders/${id}`,
+      `https://rst-store-e-com.onrender.com/api/orders/${id}`,
       config
     );
 
@@ -102,7 +102,7 @@ export const payOrder =
       };
 
       const { data } = await axios.put(
-        `https://rst-store-e-com.onrender.com/orders/${orderId}/pay`,
+        `https://rst-store-e-com.onrender.com/api/orders/${orderId}/pay`,
         paymentResult,
         config
       );
@@ -134,7 +134,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `https://rst-store-e-com.onrender.com/orders/myorders`,
+      `https://rst-store-e-com.onrender.com/api/orders/myorders`,
       config
     );
 
@@ -165,7 +165,7 @@ export const listOrders = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `https://rst-store-e-com.onrender.com/orders`,
+      `https://rst-store-e-com.onrender.com/api/orders`,
       config
     );
 
@@ -197,7 +197,7 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `https://rst-store-e-com.onrender.com/orders/${order._id}/deliver`,
+      `https://rst-store-e-com.onrender.com/api/orders/${order._id}/deliver`,
       order,
       config
     );
