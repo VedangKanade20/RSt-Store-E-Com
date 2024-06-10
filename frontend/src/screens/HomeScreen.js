@@ -20,7 +20,7 @@ const HomeScreen = () => {
 	return (
 		<>
 			<Heading as='h2' mb='8' fontSize='xl'>
-				Latest Products
+				Latest Products:
 			</Heading>
 
 			{loading ? (
