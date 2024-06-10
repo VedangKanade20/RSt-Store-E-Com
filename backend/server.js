@@ -2,6 +2,7 @@ import colors from "colors";
 import dotenv from "dotenv";
 import express from "express";
 import path from "path";
+import cors from "cors";
 
 import connectDB from "./config/db.js";
 import { errorHandler, notFound } from "./middlewares/errorMiddleware.js";
@@ -18,22 +19,20 @@ const app = express();
 const cors = require("cors");
 app.use(express.json()); // Request body parsing
 
+const corsOptions = {
+  origin: "https://localhost:3000", // Replace with your Netlify URL
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // Allow cookies if needed
+  optionsSuccessStatus: 204,
+};
+
+// Enable CORS
+app.use(cors()); // Use the cors middleware
+
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/uploads", uploadRoutes);
-app.use(cors());
-
-app.use(
-  cors({
-    origin:
-      "https://6662e44851250d01eeba52c0--snazzy-souffle-6f645f.netlify.app",
-  })
-);
-
-app.get("/api/products", (req, res) => {
-  res.json({ message: "This is a CORS-enabled endpoint" });
-});
 
 // Create a static folder
 const __dirname = path.resolve();
