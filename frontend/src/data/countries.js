@@ -11,7 +11,7 @@ export const countries = [
   "Argentina",
   "Armenia",
   "Aruba",
-  "Bocha",
+
   "Australia",
   "Austria",
   "Azerbaijan",
