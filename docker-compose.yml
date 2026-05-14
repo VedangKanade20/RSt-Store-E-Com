@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  client:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - server
+
+  server:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/mydb
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"

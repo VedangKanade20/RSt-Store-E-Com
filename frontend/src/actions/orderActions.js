@@ -1,4 +1,5 @@
 import axios from "axios";
+import API_URL from "../utils/api";
 
 import {
   ORDER_CREATE_FAIL,
@@ -36,11 +37,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(
-      `https://rst-store-e-com.onrender.com/api/orders`,
-      order,
-      config
-    );
+    const { data } = await axios.post(`${API_URL}/api/orders`, order, config);
 
     dispatch({ type: ORDER_CREATE_SUCCESS, payload: data });
   } catch (err) {
@@ -68,10 +65,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(
-      `https://rst-store-e-com.onrender.com/api/orders/${id}`,
-      config
-    );
+    const { data } = await axios.get(`${API_URL}/api/orders/${id}`, config);
 
     dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data });
   } catch (err) {
@@ -102,9 +96,9 @@ export const payOrder =
       };
 
       const { data } = await axios.put(
-        `https://rst-store-e-com.onrender.com/api/orders/${orderId}/pay`,
+        `${API_URL}/api/orders/${orderId}/pay`,
         paymentResult,
-        config
+        config,
       );
 
       dispatch({ type: ORDER_PAY_SUCCESS, payload: data });
@@ -133,10 +127,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(
-      `https://rst-store-e-com.onrender.com/api/orders/myorders`,
-      config
-    );
+    const { data } = await axios.get(`${API_URL}/api/orders/myorders`, config);
 
     dispatch({ type: ORDER_MY_LIST_SUCCESS, payload: data });
   } catch (err) {
@@ -164,10 +155,7 @@ export const listOrders = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(
-      `https://rst-store-e-com.onrender.com/api/orders`,
-      config
-    );
+    const { data } = await axios.get(`${API_URL}/api/orders`, config);
 
     dispatch({ type: ORDER_LIST_SUCCESS, payload: data });
   } catch (err) {
@@ -197,9 +185,9 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `https://rst-store-e-com.onrender.com/api/orders/${order._id}/deliver`,
+      `${API_URL}/api/orders/${order._id}/deliver`,
       order,
-      config
+      config,
     );
 
     dispatch({ type: ORDER_DELIVER_SUCCESS, payload: data });

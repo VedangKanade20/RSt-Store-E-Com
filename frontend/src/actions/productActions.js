@@ -1,4 +1,5 @@
 import axios from "axios";
+import API_URL from "../utils/api";
 
 import {
   PRODUCT_CREATE_FAIL,
@@ -25,9 +26,7 @@ export const listProducts = () => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
 
-    const { data } = await axios.get(
-      "https://rst-store-e-com.onrender.com/api/products"
-    );
+    const { data } = await axios.get(`${API_URL}/api/products`);
 
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (err) {
@@ -45,9 +44,7 @@ export const listProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
-    const { data } = await axios.get(
-      `https://rst-store-e-com.onrender.com/api/products/${id}`
-    );
+    const { data } = await axios.get(`${API_URL}/api/products/${id}`);
 
     dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
   } catch (err) {
@@ -75,10 +72,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(
-      `https://rst-store-e-com.onrender.com/api/products/${id}`,
-      config
-    );
+    await axios.delete(`${API_URL}/api/products/${id}`, config);
 
     dispatch({ type: PRODUCT_DELETE_SUCCESS });
   } catch (err) {
@@ -107,11 +101,7 @@ export const createProduct = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(
-      `https://rst-store-e-com.onrender.com/api/products`,
-      {},
-      config
-    );
+    const { data } = await axios.post(`${API_URL}/api/products`, {}, config);
 
     dispatch({ type: PRODUCT_CREATE_SUCCESS, payload: data });
   } catch (err) {
@@ -141,9 +131,9 @@ export const updateProduct = (product) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `https://rst-store-e-com.onrender.com/api/products/${product._id}`,
+      `${API_URL}/api/products/${product._id}`,
       product,
-      config
+      config,
     );
 
     dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data });
@@ -175,9 +165,9 @@ export const createProductReview =
       };
 
       await axios.post(
-        `https://rst-store-e-com.onrender.com/api/products/${productId}/reviews`,
+        `${API_URL}/api/products/${productId}/reviews`,
         review,
-        config
+        config,
       );
 
       dispatch({ type: PRODUCT_REVIEW_CREATE_SUCCESS });
