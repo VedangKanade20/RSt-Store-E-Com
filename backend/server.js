@@ -19,14 +19,26 @@ const app = express();
 app.use(express.json()); // Request body parsing
 
 const corsOptions = {
-  origin: "https://localhost:3000", // Replace with your Netlify URL
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      process.env.FRONTEND_URL,
+      "http://localhost:3000",
+      "https://rst-store-e-com.onrender.com",
+    ].filter(Boolean);
+
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`CORS policy blocked request from origin ${origin}`));
+    }
+  },
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true, // Allow cookies if needed
+  credentials: true,
   optionsSuccessStatus: 204,
 };
 
 // Enable CORS
-app.use(cors()); // Use the cors middleware
+app.use(cors(corsOptions));
 
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
@@ -56,6 +68,7 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(
-    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
+    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow
+      .bold,
   );
 });
